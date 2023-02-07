@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import PopularPageView from '../views/PopularPageView.vue';
+import PostsView from '../views/PostsView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,19 +7,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'popular',
-      component: PopularPageView,
-    },
-
-    {
-      path: '/new',
-      name: 'new',
-      component: () => import('../views/NewPageView.vue'),
+      component: PostsView,
     },
 
     {
       path: '/posts/:id',
       name: 'post',
-      component: () => import('../views/PostPageView.vue'),
+      component: () => import('../views/PostView.vue'),
     },
 
     {
