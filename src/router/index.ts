@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import PostsView from '../views/PostsView.vue';
+import PhotosView from '../views/PhotosView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,13 +7,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'popular',
-      component: PostsView,
+      component: PhotosView,
     },
 
     {
       path: '/posts/:id',
       name: 'post',
-      component: () => import('../views/PostView.vue'),
+      component: () => import('../views/PhotoView.vue'),
     },
 
     {
