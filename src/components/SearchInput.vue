@@ -15,7 +15,7 @@ function changeSearchState(state: boolean = false): void {
 
 <template>
   <div
-    class="overflow-hidden input-box h-full max-h-9 flex items-center bg-gray-200 px-2 rounded-md transition-all duration-300"
+    class="input-box hidden sm:flex overflow-hidden h-full max-h-9 items-center bg-gray-200 px-2 rounded-md transition-all duration-300"
     :class="{ _open: open }"
     v-click-outside="changeSearchState"
   >
@@ -38,6 +38,8 @@ function changeSearchState(state: boolean = false): void {
       type="text"
       class="bg-gray-200 px-1 outline-none"
       placeholder="Search..."
+      @focus="changeSearchState(true)"
+      @blur="changeSearchState(false)"
     />
   </div>
 </template>
