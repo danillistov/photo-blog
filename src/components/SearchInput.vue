@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid';
+import { useStore } from 'vuex';
 
 const open = ref(false);
 const searchEl = ref<HTMLInputElement>();
+const store = useStore();
 
 function changeSearchState(state: boolean = false): void {
   open.value = state;
   if (state) {
     searchEl.value?.focus();
+  }
+}
+
+function filterPhotosBySearch(event: Event): void {
+  if (event.target instanceof HTMLInputElement) {
+    store.dispatch('setSearchString', event.target.value);
   }
 }
 </script>
@@ -40,6 +48,7 @@ function changeSearchState(state: boolean = false): void {
       placeholder="Search..."
       @focus="changeSearchState(true)"
       @blur="changeSearchState(false)"
+      @input="filterPhotosBySearch"
     />
   </div>
 </template>

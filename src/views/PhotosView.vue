@@ -6,7 +6,7 @@ import type { IPhotoResponse } from '@/types/photos.types';
 
 const store = useStore();
 const photos: ComputedRef<IPhotoResponse[]> = computed(
-  () => store.getters.getPhotos
+  () => store.getters.getFilteredPhotos
 );
 
 onMounted(async () => {
