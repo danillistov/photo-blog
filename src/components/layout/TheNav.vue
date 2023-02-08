@@ -45,6 +45,8 @@
             </div>
           </div>
         </div>
+
+        <SearchInput />
       </div>
     </div>
 
@@ -71,6 +73,7 @@
 
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
+import SearchInput from '@/components/SearchInput.vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 
