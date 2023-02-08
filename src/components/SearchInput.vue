@@ -24,12 +24,12 @@ function changeSearchState(state: boolean = false): void {
         <MagnifyingGlassIcon
           v-if="!open"
           class="h-6 cursor-pointer"
-          @click.self="changeSearchState(true)"
+          @click="changeSearchState(true)"
         />
         <XMarkIcon
           v-else
           class="h-6 cursor-pointer"
-          @click.self="changeSearchState(false)"
+          @click="changeSearchState(false)"
         />
       </Transition>
     </span>
