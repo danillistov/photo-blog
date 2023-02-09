@@ -1,5 +1,9 @@
 <template>
-  <Disclosure as="nav" class="bg-stone-900" v-slot="{ open }">
+  <Disclosure
+    as="nav"
+    class="fixed top-0 left-0 w-full bg-stone-900"
+    v-slot="{ open }"
+  >
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -78,7 +82,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 
 const navigation = ref([
-  { name: 'Popular', href: '#', current: true },
-  { name: 'New', href: '#', current: false },
+  { name: 'New', href: '#', current: true },
+  { name: 'Albums', href: '#', current: false },
 ]);
 </script>

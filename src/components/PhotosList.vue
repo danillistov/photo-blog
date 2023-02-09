@@ -12,9 +12,18 @@ const props = withDefaults(defineProps<IProps>(), {
 </script>
 
 <template>
-  <div class="photos-list flex flex-col items-center p-5">
-    <div v-for="photo in photos" :key="photo.id" class="mb-5">
-      <PhotosItem :photo="photo" />
-    </div>
+  <div class="photos-list flex flex-col items-center w-full mx-auto p-5">
+    <PhotosItem
+      v-for="photo in photos"
+      :key="photo.id"
+      :photo="photo"
+      class="mb-12"
+    />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.photos-list {
+  max-width: 650px;
+}
+</style>

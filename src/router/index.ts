@@ -17,6 +17,18 @@ const router = createRouter({
     },
 
     {
+      path: '/albums',
+      name: 'albums',
+      component: () => import('../views/AlbumsView.vue'),
+    },
+
+    {
+      path: '/albums/:slag',
+      name: 'album',
+      component: () => import('../views/AlbumView.vue'),
+    },
+
+    {
       path: '/:pathMatch(.*)*',
       redirect: '/',
     },

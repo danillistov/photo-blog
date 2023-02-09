@@ -12,6 +12,7 @@ const store = createStore({
     getPhotos: (state) => state.photos,
 
     getFilteredPhotos: (state) => {
+      const splicedPhotos = state.photos.slice(0, 10);
       let filteredPhotos = [];
 
       const filters = {
@@ -19,9 +20,9 @@ const store = createStore({
           photo.title.toLowerCase().includes(state.search.toLowerCase()),
       };
 
-      filteredPhotos = state.photos.filter(filters.search);
+      filteredPhotos = splicedPhotos.filter(filters.search);
 
-      return filteredPhotos.splice(0, 10);
+      return filteredPhotos;
     },
   },
 

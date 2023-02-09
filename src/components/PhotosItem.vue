@@ -1,17 +1,47 @@
 <script lang="ts" setup>
 import type { IPhotoResponse } from '@/types/photos.types';
-
+import { capitalize, computed } from 'vue';
 export interface IProps {
   photo: IPhotoResponse;
 }
+
+const author: string = 'Danil Listov';
+const album: string = 'Japan, Tokyo';
 
 const props = withDefaults(defineProps<IProps>(), {
   photo: () => ({} as IPhotoResponse),
 });
 
-console.log(props.photo);
+const title = computed(() => {
+  return capitalize(props?.photo?.title);
+});
 </script>
 
 <template>
-  <div class="photos-item">{{ photo.title }}</div>
+  <div class="photos-item">
+    <img
+      class="photos-item__image h-96 w-full mb-5 object-cover rounded-xl"
+      :src="photo.url"
+    />
+
+    <div class="photos-item__disc">
+      <div
+        class="photos-item__meta uppercase text-base font-light mb-1.5 text-stone-300"
+      >
+        By
+        <a href="#" class="text-stone-500 hover:text-stone-600">{{ author }}</a>
+        in
+        <a href="#" class="text-stone-500 hover:text-stone-600">{{ album }}</a>
+      </div>
+      <div class="photos-item__title text-5xl normal-case">
+        {{ title }}
+      </div>
+    </div>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.photos-item {
+  width: 100%;
+}
+</style>
