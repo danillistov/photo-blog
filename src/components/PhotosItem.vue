@@ -18,7 +18,7 @@ const title = computed(() => {
 </script>
 
 <template>
-  <div class="photos-item">
+  <a href="#" class="photos-item">
     <img
       class="photos-item__image h-96 w-full mb-5 object-cover rounded-xl"
       :src="photo.url"
@@ -33,15 +33,23 @@ const title = computed(() => {
         in
         <a href="#" class="text-stone-500 hover:text-stone-600">{{ album }}</a>
       </div>
-      <div class="photos-item__title text-5xl normal-case">
+      <div class="photos-item__title text-5xl font-light normal-case">
         {{ title }}
       </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <style lang="scss" scoped>
 .photos-item {
   width: 100%;
+
+  &__title {
+    transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  &:hover &__title {
+    color: #57534e;
+  }
 }
 </style>

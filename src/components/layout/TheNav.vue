@@ -1,7 +1,35 @@
+<script setup lang="ts">
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
+import SearchInput from '@/components/SearchInput.vue';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { ref, onMounted } from 'vue';
+import { scrollDirectionHandler } from '@/helpers';
+
+const navigation = ref([
+  { name: 'New', href: '#', current: true },
+  { name: 'Albums', href: '#', current: false },
+]);
+
+const navIsShown = ref(true);
+
+function showNavBar(): void {
+  navIsShown.value = true;
+}
+
+function hideNavBar(): void {
+  navIsShown.value = false;
+}
+
+onMounted(async () => {
+  scrollDirectionHandler(showNavBar, hideNavBar);
+});
+</script>
+
 <template>
   <Disclosure
     as="nav"
-    class="fixed top-0 left-0 w-full bg-stone-900"
+    class="the-nav fixed top-0 left-0 w-full bg-stone-900"
+    :class="{ '_is-hidden': !navIsShown }"
     v-slot="{ open }"
   >
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -75,14 +103,13 @@
   </Disclosure>
 </template>
 
-<script setup lang="ts">
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-import SearchInput from '@/components/SearchInput.vue';
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue';
+<style lang="scss" scoped>
+.the-nav {
+  transform: translateY(0);
+  transition: 0.5s ease-in-out;
 
-const navigation = ref([
-  { name: 'New', href: '#', current: true },
-  { name: 'Albums', href: '#', current: false },
-]);
-</script>
+  &._is-hidden {
+    transform: translateY(-100%);
+  }
+}
+</style>
