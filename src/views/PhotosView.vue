@@ -3,6 +3,7 @@ import { onMounted, computed } from 'vue';
 import type { ComputedRef } from 'vue';
 import { useStore } from 'vuex';
 import type { IPhotoResponse } from '@/types/photos.types';
+import PhotosList from '@/components/PhotosList.vue';
 
 const store = useStore();
 const photos: ComputedRef<IPhotoResponse[]> = computed(
@@ -15,7 +16,5 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main>
-    <div v-for="photo in photos" :key="photo.id">{{ photo.title }}</div>
-  </main>
+  <PhotosList v-if="photos.length" :photos="photos" />
 </template>

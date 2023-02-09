@@ -21,7 +21,7 @@ const store = createStore({
 
       filteredPhotos = state.photos.filter(filters.search);
 
-      return filteredPhotos;
+      return filteredPhotos.splice(0, 10);
     },
   },
 

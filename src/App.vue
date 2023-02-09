@@ -7,8 +7,9 @@ import TheNav from '@/components/layout/TheNav.vue';
   <header>
     <TheNav />
   </header>
-
-  <RouterView />
+  <main class="container mx-auto mt-16">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped></style>
