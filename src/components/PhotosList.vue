@@ -6,7 +6,7 @@ export interface IProps {
   photos: Array<IPhotoResponse>;
 }
 
-const props = withDefaults(defineProps<IProps>(), {
+withDefaults(defineProps<IProps>(), {
   photos: () => [],
 });
 </script>
