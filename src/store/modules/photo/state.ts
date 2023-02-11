@@ -1,4 +1,5 @@
 import type { IPhotoResponse } from '@/types/photos.types';
+
 export type State = {
   currentPhoto: IPhotoResponse;
 };

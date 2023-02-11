@@ -32,10 +32,24 @@ export const fetchAllPhotos = async <
   }
 };
 
-export const fetchPhotoWithParams = async (
+export const fetchPhotosWithParams = async (
   params = {}
-): Promise<IPhotoResponse> => {
+): Promise<IPhotoResponse[]> => {
   const url = createAddress('photos', params);
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.warn('[api/fetchPhotoById]: request data error', error);
+    throw error;
+  }
+};
+
+export const fetchPhotoById = async (id: number): Promise<IPhotoResponse> => {
+  const url = new URL(`photos/${id}`, BASE_URL);
 
   try {
     const response = await fetch(url);
