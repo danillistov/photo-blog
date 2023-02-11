@@ -16,8 +16,8 @@ import type { Mutations } from './mutations';
 import { actions } from './actions';
 import type { Actions } from './actions';
 
-export type PhotosStore = Omit<
-  VuexStore<State>,
+export type PhotosStore<S = State> = Omit<
+  VuexStore<S>,
   'getters' | 'commit' | 'dispatch'
 > & {
   commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
@@ -42,4 +42,5 @@ export const store: Module<State, RootState> = {
   getters,
   mutations,
   actions,
+  namespaced: true,
 };

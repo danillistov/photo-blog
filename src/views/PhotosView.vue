@@ -7,14 +7,14 @@ import PhotosList from '@/components/PhotosList.vue';
 
 const store = useStore();
 const photos: ComputedRef<IPhotoResponse[]> = computed(
-  () => store.getters.getFilteredPhotos
+  () => store.getters['photos/getFilteredPhotos'] ?? []
 );
 
 onMounted(async () => {
-  await store.dispatch('fetchPhotos');
+  await store.dispatch('photos/fetchPhotos');
 });
 </script>
 
 <template>
-  <PhotosList v-if="photos.length" :photos="photos" />
+  <PhotosList v-if="photos?.length" :photos="photos" />
 </template>

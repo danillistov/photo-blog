@@ -16,7 +16,7 @@ function changeSearchState(state: boolean = false): void {
 
 function filterPhotosBySearch(event: Event): void {
   if (event.target instanceof HTMLInputElement) {
-    store.dispatch('setSearchString', event.target.value);
+    store.dispatch('photos/setSearchString', event.target.value);
   }
 }
 </script>

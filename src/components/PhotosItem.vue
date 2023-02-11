@@ -1,9 +1,13 @@
 <script lang="ts" setup>
-import type { IPhotoResponse } from '@/types/photos.types';
 import { capitalize, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import type { IPhotoResponse } from '@/types/photos.types';
+
 export interface IProps {
   photo: IPhotoResponse;
 }
+
+const router = useRouter();
 
 const author: string = 'Danil Listov';
 const album: string = 'Japan, Tokyo';
@@ -15,10 +19,19 @@ const props = withDefaults(defineProps<IProps>(), {
 const title = computed(() => {
   return capitalize(props?.photo?.title);
 });
+
+function navigateToPhotoPage(): void {
+  router.push({
+    name: 'post',
+    params: {
+      id: props?.photo?.id,
+    },
+  });
+}
 </script>
 
 <template>
-  <a href="#" class="photos-item">
+  <a href="#" class="photos-item" @click.prevent="navigateToPhotoPage">
     <img
       class="photos-item__image h-96 w-full mb-5 object-cover rounded-xl"
       :src="photo.url"
