@@ -8,7 +8,11 @@ import TheNav from '@/components/layout/TheNav.vue';
     <TheNav />
   </header>
   <main class="container mx-auto mt-16">
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="page" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </main>
 </template>
 

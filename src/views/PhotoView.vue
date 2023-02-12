@@ -7,6 +7,9 @@ import type { IPhotoResponse } from '@/types/photos.types';
 
 const store = useStore();
 const route = useRoute();
+const description = '';
+const author = '';
+const album = '';
 const currentPhoto: ComputedRef<IPhotoResponse> = computed(() => {
   return store.getters['photo/getCurrentPhoto'] ?? {};
 });
@@ -16,5 +19,5 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="photo-page">{{ currentPhoto.title }}</div>
+  <div class="photo-page"></div>
 </template>

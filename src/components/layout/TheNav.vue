@@ -28,7 +28,7 @@ onMounted(async () => {
 <template>
   <Disclosure
     as="nav"
-    class="the-nav fixed top-0 left-0 w-full bg-stone-900"
+    class="the-nav fixed top-0 left-0 w-full bg-stone-900 z-10"
     :class="{ '_is-hidden': !navIsShown }"
     v-slot="{ open }"
   >
