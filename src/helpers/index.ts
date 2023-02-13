@@ -1,4 +1,4 @@
-export const scrollDirectionHandler = (
+const scrollDirectionHandler = (
   onUpCallback?: () => void,
   onDownCallback?: () => void
 ): void => {
@@ -20,3 +20,5 @@ export const scrollDirectionHandler = (
     scrollPos = top;
   });
 };
+
+export { scrollDirectionHandler };
