@@ -3,6 +3,15 @@ import { ref } from 'vue';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid';
 import { useStore } from 'vuex';
 
+withDefaults(
+  defineProps<{
+    isSearchEnabled?: boolean;
+  }>(),
+  {
+    isSearchEnabled: false,
+  }
+);
+
 const open = ref(false);
 const searchEl = ref<HTMLInputElement>();
 const store = useStore();
@@ -45,6 +54,7 @@ function filterPhotosBySearch(event: Event): void {
       ref="searchEl"
       type="text"
       class="bg-gray-200 px-1 outline-none"
+      :disabled="!isSearchEnabled"
       placeholder="Search..."
       @focus="changeSearchState(true)"
       @blur="changeSearchState(false)"

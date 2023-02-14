@@ -2,13 +2,20 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import SearchInput from '@/components/SearchInput.vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
 import { scrollDirectionHandler } from '@/helpers';
 
 const navigation = ref([
   { name: 'New', href: '#', current: true },
   { name: 'Albums', href: '#', current: false },
 ]);
+
+const store = useStore();
+
+const isSearchInputEnabled = computed(() => {
+  return store.getters['photos/getSearchInputStatus'];
+});
 
 const navIsShown = ref(true);
 
@@ -78,7 +85,7 @@ onMounted(async () => {
           </div>
         </div>
 
-        <SearchInput />
+        <SearchInput :is-search-enabled="isSearchInputEnabled" />
       </div>
     </div>
 
@@ -96,8 +103,9 @@ onMounted(async () => {
             'block px-3 py-2 rounded-md text-base font-medium',
           ]"
           :aria-current="item.current ? 'page' : undefined"
-          >{{ item.name }}</DisclosureButton
         >
+          {{ item.name }}
+        </DisclosureButton>
       </div>
     </DisclosurePanel>
   </Disclosure>

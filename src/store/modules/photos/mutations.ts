@@ -6,6 +6,7 @@ import type { State } from './state';
 export type Mutations<S = State> = {
   [MutationTypes.SET_PHOTOS](state: S, payload: IPhotoResponse[]): void;
   [MutationTypes.SET_SEARCH](state: S, payload: string): void;
+  [MutationTypes.SET_SEARCH_INPUT_STATE](state: S, payload: boolean): void;
 };
 
 export const mutations: MutationTree<State> & Mutations = {
@@ -15,5 +16,9 @@ export const mutations: MutationTree<State> & Mutations = {
 
   [MutationTypes.SET_SEARCH]: (state, payload) => {
     state.search = payload;
+  },
+
+  [MutationTypes.SET_SEARCH_INPUT_STATE]: (state, payload) => {
+    state.searchIsEnabled = payload;
   },
 };

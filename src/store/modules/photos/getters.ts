@@ -6,6 +6,7 @@ import type { IPhotoResponse } from '@/types/photos.types';
 export type Getters = {
   getPhotos(state: State): IPhotoResponse[];
   getFilteredPhotos(state: State): IPhotoResponse[];
+  getSearchInputStatus(state: State): boolean;
 };
 
 export const getters: GetterTree<State, RootState> & Getters = {
@@ -23,5 +24,9 @@ export const getters: GetterTree<State, RootState> & Getters = {
     filteredPhotos = splicedPhotos.filter(filters.search);
 
     return filteredPhotos;
+  },
+
+  getSearchInputStatus(state) {
+    return state.searchIsEnabled;
   },
 };

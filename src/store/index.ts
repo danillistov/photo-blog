@@ -1,26 +1,19 @@
 import { createStore } from 'vuex';
-import type { MutationTree, ActionTree } from 'vuex';
+import type { MutationTree, ActionTree, GetterTree } from 'vuex';
 
 import { store as photos } from '@/store/modules/photos';
 import { store as photo } from '@/store/modules/photo';
 import type { PhotosStore } from '@/store/modules/photos';
 import type { PhotoStore } from '@/store/modules/photo';
+import type { ILoading } from '@/types/general.types';
 import { MutationsTypes } from './mutations.types';
 import { ActionsTypes } from './actions.types';
-
-interface ILoading {
-  state: boolean;
-  message: string;
-}
 
 export interface RootState {
   loading: ILoading;
   photos?: PhotosStore;
   photo?: PhotoStore;
 }
-
-export type Store = PhotosStore<Pick<RootState, 'photos'>> &
-  PhotoStore<Pick<RootState, 'photo'>>;
 
 const state: RootState = {
   loading: {
@@ -41,8 +34,19 @@ const mutations: MutationTree<RootState> = {
   },
 };
 
+const getters: GetterTree<RootState, RootState> = {
+  getLoadingOverlayState(state) {
+    return state?.loading?.state ?? false;
+  },
+
+  getLoadingOverlayMessage(state) {
+    return state?.loading?.message ?? '';
+  },
+};
+
 export const store = createStore({
   state,
+  getters,
   actions,
   mutations,
   modules: {
@@ -50,7 +54,3 @@ export const store = createStore({
     photo,
   },
 });
-
-export function useStore(): Store {
-  return store as Store;
-}

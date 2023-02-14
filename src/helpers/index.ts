@@ -1,3 +1,5 @@
+import { useStore } from 'vuex';
+
 const scrollDirectionHandler = (
   onUpCallback?: () => void,
   onDownCallback?: () => void
@@ -21,4 +23,42 @@ const scrollDirectionHandler = (
   });
 };
 
-export { scrollDirectionHandler };
+interface IUseFetcherOptions {
+  loadingMessage?: string;
+}
+
+const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
+  const defaultOptions: IUseFetcherOptions = {
+    loadingMessage: 'Loading...',
+  };
+
+  const fetchOptions: IUseFetcherOptions = {
+    ...defaultOptions,
+    ...options,
+  };
+
+  const store = useStore();
+
+  const getData = async (...params: any[]) => {
+    try {
+      store.dispatch('changeLoadingOverlayState', {
+        state: true,
+        message: fetchOptions.loadingMessage,
+      });
+
+      const data = await fetcher(...params);
+      return data;
+    } catch (err) {
+      console.warn(err);
+    } finally {
+      store.dispatch('changeLoadingOverlayState', {
+        state: false,
+        message: '',
+      });
+    }
+  };
+
+  return getData;
+};
+
+export { scrollDirectionHandler, useFetcher };
