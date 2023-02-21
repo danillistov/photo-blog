@@ -11,5 +11,16 @@ const loadingMessage = computed(
 </script>
 
 <template>
-  <div class="loading-overlay hidden"></div>
+  <div
+    class="loading-overlay bg-stone-300 fixed left-0 min-w-full opacity-80 justify-center items-center"
+    :class="!loadingState ? 'flex' : 'hidden'"
+  >
+    {{ loadingMessage }}
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.loading-overlay {
+  height: calc(100vh - 64px);
+}
+</style>

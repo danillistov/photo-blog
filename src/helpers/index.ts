@@ -23,10 +23,12 @@ const scrollDirectionHandler = (
   });
 };
 
+//TODO: move this interface to global types file
 interface IUseFetcherOptions {
   loadingMessage?: string;
 }
 
+//TODO: Move this function to composable folder
 const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
   const defaultOptions: IUseFetcherOptions = {
     loadingMessage: 'Loading...',

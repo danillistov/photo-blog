@@ -11,7 +11,9 @@ const photos: ComputedRef<IPhotoResponse[]> = computed(
 );
 
 onMounted(async () => {
-  await store.dispatch('photos/fetchPhotos');
+  await store.dispatch('photos/fetchPhotos', {
+    message: 'Loading photos...',
+  });
 });
 </script>
 
