@@ -20,7 +20,10 @@ const isLoading = computed(() => {
     class="main container mx-auto mt-16"
     :class="isLoading ? 'overflow-hidden _is-loading' : ''"
   >
-    <LoadingOverlay />
+    <Transition name="loading">
+      <LoadingOverlay v-if="isLoading" />
+    </Transition>
+
     <RouterView v-slot="{ Component }">
       <Transition name="page" mode="out-in">
         <component :is="Component" />

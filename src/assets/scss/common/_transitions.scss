@@ -18,3 +18,13 @@
   opacity: 0;
   transform: translateX(-5%);
 }
+
+.loading-enter-active,
+.loading-leave-active {
+  transition: opacity, .6s ease-in-out;
+}
+
+.loading-enter-from,
+.loading-leave-to {
+  opacity: 0;
+}
