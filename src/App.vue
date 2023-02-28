@@ -8,8 +8,12 @@ import { useStore } from 'vuex';
 const store = useStore();
 
 const isLoading = computed(() => {
-  return store.getters['getLoadingOverlayState'] ?? true;
+  return store.getters['getLoadingOverlayState'] ?? false;
 });
+
+const loadingMessage = computed(
+  () => store.getters['getLoadingOverlayMessage']
+);
 </script>
 
 <template>
@@ -21,7 +25,11 @@ const isLoading = computed(() => {
     :class="isLoading ? 'overflow-hidden _is-loading' : ''"
   >
     <Transition name="loading">
-      <LoadingOverlay v-if="isLoading" />
+      <LoadingOverlay
+        v-if="isLoading"
+        :state="isLoading"
+        :message="loadingMessage"
+      />
     </Transition>
 
     <RouterView v-slot="{ Component }">
