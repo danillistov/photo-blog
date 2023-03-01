@@ -2,11 +2,11 @@
 import PhotosItem from '@/components/PhotosItem.vue';
 import type { IPhotoResponse } from '@/types/photos.types';
 
-export interface IProps {
+export interface IPhotosProps {
   photos: Array<IPhotoResponse>;
 }
 
-withDefaults(defineProps<IProps>(), {
+withDefaults(defineProps<IPhotosProps>(), {
   photos: () => [],
 });
 </script>

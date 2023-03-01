@@ -13,17 +13,14 @@ export const getters: GetterTree<State, RootState> & Getters = {
   getPhotos: (state) => state.photos,
 
   getFilteredPhotos: (state) => {
-    const splicedPhotos = state.photos.slice(0, 10);
-    let filteredPhotos = [];
-
     const filters = {
       search: (photo: IPhotoResponse) =>
         photo.title.toLowerCase().includes(state.search.toLowerCase()),
     };
 
-    filteredPhotos = splicedPhotos.filter(filters.search);
+    const filteredPhotos = state.photos.filter(filters.search);
 
-    return filteredPhotos;
+    return filteredPhotos ?? [];
   },
 
   getSearchInputStatus(state) {
