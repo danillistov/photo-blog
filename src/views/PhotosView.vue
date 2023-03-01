@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, computed, ref } from 'vue';
+import { onMounted, computed, ref, nextTick } from 'vue';
 import type { ComputedRef } from 'vue';
 import { useStore } from 'vuex';
 import type { IPhotoResponse } from '@/types/photos.types';
@@ -17,8 +17,16 @@ const limitedPhotos: ComputedRef<IPhotoResponse[]> = computed(() => {
   return photos.value.slice(0, currentLimit.value);
 });
 
-function changeCurrentLimitValue(newLimit: number) {
+async function changeCurrentLimitValue(newLimit: number) {
   currentLimit.value = newLimit;
+
+  await nextTick();
+
+  window.scrollBy({
+    top: 400,
+    left: 0,
+    behavior: 'smooth',
+  });
 }
 
 onMounted(async () => {
