@@ -37,12 +37,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <PhotosList v-if="photos?.length" :photos="limitedPhotos" />
-  <Pagination
-    v-if="photos?.length && photos?.length > currentLimit"
-    :photos-count="photos.length"
-    :current-limit="currentLimit"
-    class="block mx-auto"
-    @change-limit="changeCurrentLimitValue"
-  />
+  <div>
+    <PhotosList v-if="photos?.length" :photos="limitedPhotos" />
+    <Pagination
+      v-if="photos?.length && photos?.length > currentLimit"
+      :photos-count="photos.length"
+      :current-limit="currentLimit"
+      class="block mx-auto"
+      @change-limit="changeCurrentLimitValue"
+    />
+  </div>
 </template>

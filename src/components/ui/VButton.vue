@@ -5,7 +5,7 @@ type Theme = 'dark' | 'light';
 
 const props = withDefaults(
   defineProps<{
-    theme: Theme;
+    theme?: Theme;
   }>(),
   {
     theme: 'dark',
