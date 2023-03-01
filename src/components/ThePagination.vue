@@ -17,10 +17,7 @@ const newLimitStep = computed(() => {
 </script>
 
 <template>
-  <VButton
-    theme="light"
-    @click="$emit('change-limit', currentLimit + newLimitStep)"
-  >
-    Load more {{ newLimitStep }} photos
+  <VButton @click="$emit('change-limit', currentLimit + newLimitStep)">
+    Show {{ newLimitStep }} more photos
   </VButton>
 </template>

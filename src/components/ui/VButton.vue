@@ -28,7 +28,7 @@ const currentTheme = computed(() => {
 
 <template>
   <button
-    class="v-button p-4 rounded-md"
+    class="v-button p-4 rounded-md hover:opacity-80 transition"
     :class="currentTheme"
     @click="$emit('click')"
   >

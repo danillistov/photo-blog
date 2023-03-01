@@ -21,7 +21,7 @@ const loadingMessage = computed(
     <TheNav />
   </header>
   <main
-    class="main container mx-auto mt-16"
+    class="main container mx-auto my-16"
     :class="isLoading ? 'overflow-hidden _is-loading' : ''"
   >
     <Transition name="loading">
