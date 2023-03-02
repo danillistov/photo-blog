@@ -5,7 +5,6 @@ import { useStore } from 'vuex';
 import type { IPhotoResponse } from '@/types/photos.types';
 import PhotosList from '@/components/PhotosList.vue';
 import Pagination from '@/components/ThePagination.vue';
-import EmptyMessageStub from '@/components/EmptyMessageStub.vue';
 
 const store = useStore();
 const photos: ComputedRef<IPhotoResponse[]> = computed(
@@ -39,9 +38,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col">
-    <PhotosList v-if="photos?.length" :photos="limitedPhotos" />
-
-    <EmptyMessageStub message="The photo list is currently empty." v-else />
+    <PhotosList :photos="limitedPhotos" />
 
     <Pagination
       v-if="photos?.length && photos?.length > currentLimit"

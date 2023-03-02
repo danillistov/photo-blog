@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
-import LoadingOverlay from '../LoadingOverlay.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 
 const createVueComponentInstance = <T extends {}>(options?: T) => {
   return mount(LoadingOverlay, options);
