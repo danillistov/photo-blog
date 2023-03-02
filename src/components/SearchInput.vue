@@ -50,6 +50,7 @@ function filterPhotosBySearch(event: Event): void {
         />
       </Transition>
     </span>
+
     <input
       ref="searchEl"
       type="text"
