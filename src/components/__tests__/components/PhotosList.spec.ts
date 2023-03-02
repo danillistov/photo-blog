@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import { render } from '@testing-library/vue';
+import { render, cleanup } from '@testing-library/vue';
 import { expect, describe, it } from 'vitest';
 import PhotosList from '@/components/PhotosList.vue';
 import fakePhotos from '../__fixtures__/photos';
@@ -19,6 +19,8 @@ describe('PhotosList component', () => {
     const items = await wrapper.findAll('photos-item-stub');
 
     expect(items).toHaveLength(3);
+
+    wrapper.unmount();
   });
 
   it('should display the stub message, if photos is empty', async () => {
@@ -32,5 +34,7 @@ describe('PhotosList component', () => {
     });
 
     expect(getByText(message).textContent?.trim()).toBe(message);
+
+    cleanup();
   });
 });
