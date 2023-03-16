@@ -41,7 +41,7 @@ const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
 
   const store = useStore();
 
-  const getData = async (...params: any[]) => {
+  const getData = async <T extends []>(...params: T) => {
     try {
       store.dispatch('changeLoadingOverlayState', {
         state: true,

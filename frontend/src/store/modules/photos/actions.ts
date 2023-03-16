@@ -37,6 +37,7 @@ export const actions: ActionTree<State, RootState> & Actions = {
       commit(MutationTypes.SET_PHOTOS, photos);
       commit(MutationTypes.SET_SEARCH_INPUT_STATE, true);
     } catch (err) {
+      commit(MutationTypes.SET_SEARCH_INPUT_STATE, false);
       console.warn(err);
     }
   },
