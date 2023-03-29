@@ -21,6 +21,18 @@ class PhotoPostController {
           throw new Error('[photoPostController/getAll]');
       }
   }
+
+  async getById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      const post = await PhotoPostService.getPhotoPostById(Number(id));
+      res.json(post);
+    } catch (error) {
+      res.status(500).json(error);
+      throw new Error('[photoPostController/getById]');
+    }
+  }
 }
 
 

@@ -3,13 +3,18 @@ import { IPhotoPost } from '../types/photoPost';
 
 class PhotoPostService {
   async createPhotoPost(photoPost: IPhotoPost) {
-    const post: IPhotoPost = await PhotoPost.create(photoPost);
+    const post = await PhotoPost.create(photoPost);
     return post;
   }
 
   async getAllPhotoPosts() {
-      const posts: IPhotoPost[] = await PhotoPost.find();
+      const posts = await PhotoPost.find();
       return posts;
+  }
+
+  async getPhotoPostById(id: number) {
+    const post = await PhotoPost.findOne({ id });
+    return post;
   }
 }
 

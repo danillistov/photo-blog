@@ -10,7 +10,7 @@ router.post('/posts', photoPostController.create);
 router.get('/posts', photoPostController.getAll);
 
 //Get photo post by id
-router.get('/posts/:id', () => {});
+router.get('/posts/:id', photoPostController.getById);
 
 //Update photo post
 router.put('/posts', () => {});
