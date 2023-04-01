@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
+import type { IPhotoPost } from "../types/photoPost";
 
-const PhotoPost = new mongoose.Schema({
-  id: { type: 'number', required: true },
-  author: {type: 'string', required: true},
-  albumId: {type: 'number', required: true},
-  title: {type: 'string', required: true},
-  desc: {type: 'string', required: false},
-  url: {type: 'string', required: true},
-  thumbnailUrl: { type: 'string', required: true},
+const PhotoPost = new mongoose.Schema<IPhotoPost>({
+  author: {type: String, required: true},
+  albumId: {type: Number, required: true},
+  title: {type: String, required: true},
+  desc: {type: String, required: false},
+  url: {type: String, required: true},
+  thumbnailUrl: { type: String, required: true},
 });
 
-export default mongoose.model('PhotoPost', PhotoPost);
+export default mongoose.model<IPhotoPost>('PhotoPost', PhotoPost);

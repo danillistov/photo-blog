@@ -20,6 +20,8 @@ app.use('/api', photoRouter);
 async function startApp() {
   try {
     await mongoose.connect(DB_URL);
+    console.log('[database]: MongoDB is connected');
+
     app.listen(port, () => {
       console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
     });

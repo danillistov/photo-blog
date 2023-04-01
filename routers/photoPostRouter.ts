@@ -13,9 +13,9 @@ router.get('/posts', photoPostController.getAll);
 router.get('/posts/:id', photoPostController.getById);
 
 //Update photo post
-router.put('/posts', () => {});
+router.put('/posts', photoPostController.updateById);
 
 //Delete photo post by id
-router.delete('/posts/:id', () => {});
+router.delete('/posts/:id', photoPostController.deleteById);
 
 export default router;

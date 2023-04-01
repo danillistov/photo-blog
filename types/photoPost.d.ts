@@ -1,6 +1,6 @@
 export interface IPhotoPost {
+  _id: string;
   albumId: number;
-  id: number;
   title: string;
   author: string;
   url: string;
