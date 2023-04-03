@@ -1,33 +1,56 @@
 import type { IPhotoResponse } from '@/types/photos.types';
+import { createUrlAddress } from '@/helpers';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const BASE_URL = import.meta.env.API_URL;
 
-const createAddress = <T extends {}>(
-  path: string = '/',
-  params?: T
-): string => {
-  const url: URL = new URL(path, BASE_URL);
+export const createNewPhotoPost = async (
+  post: IPhotoResponse
+): Promise<IPhotoResponse> => {
+  const url = createUrlAddress(BASE_URL, 'posts');
 
-  if (params) {
-    const queries: URLSearchParams = new URLSearchParams(params);
-    url.search = queries.toString();
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
+    });
+
+    const newPost = response.json();
+    return newPost;
+  } catch (error) {
+    console.warn('[api/createNewPhotoPost]: request data error');
+    throw error;
   }
-
-  return url.toString();
 };
 
 export const fetchAllPhotos = async <
   T extends IPhotoResponse[]
 >(): Promise<T> => {
-  const url = createAddress('photos');
+  const url = createUrlAddress(BASE_URL, 'photos');
 
   try {
     const response = await fetch(url);
-    const data = await response.json();
 
+    const data = await response.json();
     return data;
   } catch (error) {
-    console.warn('[api/fetchAllPosts]: request data error', error);
+    console.warn('[api/fetchAllPosts]: request data error');
+    throw error;
+  }
+};
+
+export const fetchPhotoById = async (id: string): Promise<IPhotoResponse> => {
+  const url = createUrlAddress(BASE_URL, `photos/${id}`);
+
+  try {
+    const response = await fetch(url);
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.warn('[api/fetchPhotoById]: request data error');
     throw error;
   }
 };
@@ -35,30 +58,55 @@ export const fetchAllPhotos = async <
 export const fetchPhotosWithParams = async (
   params = {}
 ): Promise<IPhotoResponse[]> => {
-  const url = createAddress('photos', params);
+  const url = createUrlAddress(BASE_URL, 'photos', params);
 
   try {
     const response = await fetch(url);
-    const data = await response.json();
 
+    const data = await response.json();
     return data;
   } catch (error) {
-    console.warn('[api/fetchPhotoById]: request data error', error);
+    console.warn('[api/fetchPhotosWithParams]: request data error');
     throw error;
   }
 };
 
-export const fetchPhotoById = async (id: number): Promise<IPhotoResponse> => {
-  const url = new URL(`photos/${id}`, 'http://localhost:3000');
+export const updatePhotoPost = async <T extends IPhotoResponse>(
+  updates: T
+): Promise<IPhotoResponse> => {
+  const url = createUrlAddress(BASE_URL, 'posts');
 
   try {
-    const response = await fetch(url);
-    console.log(response);
-    const data = await response.json();
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updates),
+    });
 
+    const data = await response.json();
     return data;
   } catch (error) {
-    console.warn('[api/fetchPhotoById]: request data error', error);
+    console.warn('[api/updatePhotoPost]: request data error');
+    throw error;
+  }
+};
+
+export const deletePhotoPostById = async (
+  id: string
+): Promise<IPhotoResponse> => {
+  const url = createUrlAddress(BASE_URL, `posts/${id}`);
+
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+    });
+
+    const deletedPost = response.json();
+    return deletedPost;
+  } catch (error) {
+    console.warn('[api/deletePhotoPostById]: request data error');
     throw error;
   }
 };

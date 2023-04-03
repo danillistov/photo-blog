@@ -1,4 +1,5 @@
 import { useStore } from 'vuex';
+import type { IUrlParams } from '@/types/general.types';
 
 const scrollDirectionHandler = (
   onUpCallback?: () => void,
@@ -63,4 +64,19 @@ const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
   return getData;
 };
 
-export { scrollDirectionHandler, useFetcher };
+const createUrlAddress = (
+  baseUrl: string,
+  path: string = '/',
+  params?: IUrlParams
+): string => {
+  const url: URL = new URL(path, baseUrl);
+
+  if (params) {
+    const queries: URLSearchParams = new URLSearchParams(params);
+    url.search = queries.toString();
+  }
+
+  return url.toString();
+};
+
+export { scrollDirectionHandler, useFetcher, createUrlAddress };
