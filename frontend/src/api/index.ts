@@ -1,7 +1,8 @@
+/* eslint-disable no-debugger */
 import type { IPhotoResponse } from '@/types/photos.types';
 import { createUrlAddress } from '@/helpers';
 
-const BASE_URL = import.meta.env.API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const createNewPhotoPost = async (
   post: IPhotoResponse
@@ -28,7 +29,8 @@ export const createNewPhotoPost = async (
 export const fetchAllPhotos = async <
   T extends IPhotoResponse[]
 >(): Promise<T> => {
-  const url = createUrlAddress(BASE_URL, 'photos');
+  console.log(BASE_URL);
+  const url = createUrlAddress(BASE_URL, 'posts');
 
   try {
     const response = await fetch(url);

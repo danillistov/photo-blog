@@ -2,18 +2,15 @@
 import { RouterView } from 'vue-router';
 import TheNav from '@/components/layout/TheNav.vue';
 import LoadingOverlay from './components/LoadingOverlay.vue';
-import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useLoadingOverlayStore } from '@/stores/LoadingOverlayStore';
+import { storeToRefs } from 'pinia';
 
-const store = useStore();
+const loading = useLoadingOverlayStore();
 
-const isLoading = computed(() => {
-  return store.getters['getLoadingOverlayState'] ?? false;
-});
-
-const loadingMessage = computed(
-  () => store.getters['getLoadingOverlayMessage']
-);
+const {
+  getLoadingOverlayState: isLoading,
+  getLoadingOverlayMessage: loadingMessage,
+} = storeToRefs(loading);
 </script>
 
 <template>

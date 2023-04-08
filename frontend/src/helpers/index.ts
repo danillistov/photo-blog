@@ -1,4 +1,4 @@
-import { useStore } from 'vuex';
+import { useLoadingOverlayStore } from '@/stores/LoadingOverlayStore';
 import type { IUrlParams } from '@/types/general.types';
 
 const scrollDirectionHandler = (
@@ -40,13 +40,13 @@ const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
     ...options,
   };
 
-  const store = useStore();
+  const { changeLoadingOverlayState } = useLoadingOverlayStore();
 
   const getData = async <T extends []>(...params: T) => {
     try {
-      store.dispatch('changeLoadingOverlayState', {
+      changeLoadingOverlayState({
         state: true,
-        message: fetchOptions.loadingMessage,
+        message: fetchOptions.loadingMessage ?? '',
       });
 
       const data = await fetcher(...params);
@@ -54,7 +54,7 @@ const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
     } catch (err) {
       console.warn(err);
     } finally {
-      store.dispatch('changeLoadingOverlayState', {
+      changeLoadingOverlayState({
         state: false,
         message: '',
       });
@@ -69,7 +69,7 @@ const createUrlAddress = (
   path: string = '/',
   params?: IUrlParams
 ): string => {
-  const url: URL = new URL(path, baseUrl);
+  const url: URL = new URL(`/api/${path}`, baseUrl);
 
   if (params) {
     const queries: URLSearchParams = new URLSearchParams(params);
