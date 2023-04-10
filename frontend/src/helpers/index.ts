@@ -42,7 +42,7 @@ const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
 
   const { changeLoadingOverlayState } = useLoadingOverlayStore();
 
-  const getData = async <T extends []>(...params: T) => {
+  const getData = async (...params: any[]) => {
     try {
       changeLoadingOverlayState({
         state: true,

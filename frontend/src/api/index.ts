@@ -44,7 +44,7 @@ export const fetchAllPhotos = async <
 };
 
 export const fetchPhotoById = async (id: string): Promise<IPhotoResponse> => {
-  const url = createUrlAddress(BASE_URL, `photos/${id}`);
+  const url = createUrlAddress(BASE_URL, `posts/${id}`);
 
   try {
     const response = await fetch(url);

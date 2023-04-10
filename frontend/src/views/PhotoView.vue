@@ -1,23 +1,20 @@
 <script lang="ts" setup>
 import { onMounted, computed } from 'vue';
 import type { ComputedRef } from 'vue';
-import { useStore } from 'vuex';
+import { usePhotoStore } from '@/stores/PhotoStore';
 import { useRoute } from 'vue-router';
-import type { IPhotoResponse } from '@/types/photos.types';
+import { storeToRefs } from 'pinia';
 
-const store = useStore();
 const route = useRoute();
-const description = '';
-const author = '';
-const album = '';
-const currentPhoto: ComputedRef<IPhotoResponse> = computed(() => {
-  return store.getters['photo/getCurrentPhoto'] ?? {};
-});
+
+const photoStore = usePhotoStore();
+const { getCurrentPhoto: currentPhoto } = storeToRefs(photoStore);
+const { fetchPhotoById } = photoStore;
 
 onMounted(async () => {
-  await store.dispatch('photo/fetchPhotoById', route.params.id);
+  await fetchPhotoById(route.params.id);
 });
 </script>
 <template>
-  <div class="photo-page"></div>
+  <div class="photo-page">{{ currentPhoto.title }}</div>
 </template>

@@ -24,7 +24,7 @@ function navigateToPhotoPage(): void {
   router.push({
     name: 'post',
     params: {
-      id: props?.photo?.id,
+      id: props?.photo?._id,
     },
   });
 }

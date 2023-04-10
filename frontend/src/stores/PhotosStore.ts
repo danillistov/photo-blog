@@ -19,21 +19,21 @@ export const usePhotosStore = defineStore('PhotosStore', {
   },
 
   getters: {
-    getPhotos(): IPhotoResponse[] {
-      return this.photos || [];
+    getPhotos(state): IPhotoResponse[] {
+      return state?.photos ?? [];
     },
-    getFilteredPhotos(): IPhotoResponse[] {
+    getFilteredPhotos(state): IPhotoResponse[] {
       const filters = {
         search: (photo: IPhotoResponse) =>
-          photo.title.toLowerCase().includes(this.search.toLowerCase()),
+          photo.title.toLowerCase().includes(state.search.toLowerCase()),
       };
 
-      const filteredPhotos = this.photos.filter(filters.search);
+      const filteredPhotos = state?.photos.filter(filters.search);
 
       return filteredPhotos ?? [];
     },
-    getSearchInputStatus(): boolean {
-      return this.searchIsEnabled;
+    getSearchInputStatus(state): boolean {
+      return state?.searchIsEnabled ?? '';
     },
   },
 

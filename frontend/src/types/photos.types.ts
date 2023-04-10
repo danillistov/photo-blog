@@ -1,4 +1,5 @@
 export interface IPhotoResponse {
+  _id: string;
   albumId: number;
   id: number;
   title: string;
