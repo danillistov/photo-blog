@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid';
-import { useStore } from 'vuex';
+import { usePhotosStore } from '@/stores/PhotosStore';
 
 withDefaults(
   defineProps<{
@@ -14,7 +14,8 @@ withDefaults(
 
 const open = ref(false);
 const searchEl = ref<HTMLInputElement>();
-const store = useStore();
+const photosStore = usePhotosStore();
+const { setSearchString } = photosStore;
 
 function changeSearchState(state: boolean = false): void {
   open.value = state;
@@ -25,7 +26,7 @@ function changeSearchState(state: boolean = false): void {
 
 function filterPhotosBySearch(event: Event): void {
   if (event.target instanceof HTMLInputElement) {
-    store.dispatch('photos/setSearchString', event.target.value);
+    setSearchString(event.target.value);
   }
 }
 </script>

@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { onMounted, computed, ref, nextTick } from 'vue';
 import type { ComputedRef } from 'vue';
-import { useStore } from 'vuex';
+import { storeToRefs } from 'pinia';
+import { usePhotosStore } from '@/stores/PhotosStore';
+
 import type { IPhotoResponse } from '@/types/photos.types';
+
 import PhotosList from '@/components/PhotosList.vue';
 import Pagination from '@/components/ThePagination.vue';
 
-const store = useStore();
-const photos: ComputedRef<IPhotoResponse[]> = computed(
-  () => store.getters['photos/getFilteredPhotos'] ?? []
-);
+const photosStore = usePhotosStore();
+
+const { getFilteredPhotos: photos } = storeToRefs(photosStore);
+const { fetchPhotos } = photosStore;
 
 const currentLimit = ref(15);
 
@@ -30,9 +33,7 @@ async function changeCurrentLimitValue(newLimit: number) {
 }
 
 onMounted(async () => {
-  await store.dispatch('photos/fetchPhotos', {
-    message: 'Loading photos...',
-  });
+  await fetchPhotos();
 });
 </script>
 

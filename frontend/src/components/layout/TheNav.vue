@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-import SearchInput from '@/components/SearchInput.vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ref, onMounted, computed } from 'vue';
-import { useStore } from 'vuex';
+import { ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { usePhotosStore } from '@/stores/PhotosStore';
 import { scrollDirectionHandler } from '@/helpers';
+import SearchInput from '@/components/SearchInput.vue';
 
 const navigation = ref([
   { name: 'New', href: '#', current: true },
   { name: 'Albums', href: '#', current: false },
 ]);
 
-const store = useStore();
-
-const isSearchInputEnabled = computed(() => {
-  return store.getters['photos/getSearchInputStatus'];
-});
+const photoStore = usePhotosStore();
+const { getSearchInputStatus: isSearchInputEnabled } = storeToRefs(photoStore);
 
 const navIsShown = ref(true);
 
