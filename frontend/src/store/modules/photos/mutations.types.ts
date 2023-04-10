@@ -1,5 +1,0 @@
-export enum MutationTypes {
-  SET_PHOTOS = 'SET_PHOTOS',
-  SET_SEARCH = 'SET_SEARCH',
-  SET_SEARCH_INPUT_STATE = 'SET_SEARCH_INPUT_STATE',
-}
