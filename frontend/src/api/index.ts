@@ -1,13 +1,12 @@
 /* eslint-disable no-debugger */
 import type { IPhotoResponse } from '@/types/photos.types';
 import { createUrlAddress } from '@/helpers';
-
-const BASE_URL = import.meta.env.VITE_API_URL;
+import endpoints from './endpoints';
 
 export const createNewPhotoPost = async (
   post: IPhotoResponse
 ): Promise<IPhotoResponse> => {
-  const url = createUrlAddress(BASE_URL, 'posts');
+  const url = createUrlAddress(endpoints.newPhoto);
 
   try {
     const response = await fetch(url, {
@@ -29,8 +28,7 @@ export const createNewPhotoPost = async (
 export const fetchAllPhotos = async <
   T extends IPhotoResponse[]
 >(): Promise<T> => {
-  console.log(BASE_URL);
-  const url = createUrlAddress(BASE_URL, 'posts');
+  const url = createUrlAddress(endpoints.allPhotos);
 
   try {
     const response = await fetch(url);
@@ -44,7 +42,7 @@ export const fetchAllPhotos = async <
 };
 
 export const fetchPhotoById = async (id: string): Promise<IPhotoResponse> => {
-  const url = createUrlAddress(BASE_URL, `posts/${id}`);
+  const url = createUrlAddress(endpoints.photoById(id));
 
   try {
     const response = await fetch(url);
@@ -60,7 +58,7 @@ export const fetchPhotoById = async (id: string): Promise<IPhotoResponse> => {
 export const fetchPhotosWithParams = async (
   params = {}
 ): Promise<IPhotoResponse[]> => {
-  const url = createUrlAddress(BASE_URL, 'photos', params);
+  const url = createUrlAddress(endpoints.photoWithParams, params);
 
   try {
     const response = await fetch(url);
@@ -76,7 +74,7 @@ export const fetchPhotosWithParams = async (
 export const updatePhotoPost = async <T extends IPhotoResponse>(
   updates: T
 ): Promise<IPhotoResponse> => {
-  const url = createUrlAddress(BASE_URL, 'posts');
+  const url = createUrlAddress(endpoints.updatePhoto);
 
   try {
     const response = await fetch(url, {
@@ -98,7 +96,7 @@ export const updatePhotoPost = async <T extends IPhotoResponse>(
 export const deletePhotoPostById = async (
   id: string
 ): Promise<IPhotoResponse> => {
-  const url = createUrlAddress(BASE_URL, `posts/${id}`);
+  const url = createUrlAddress(endpoints.deletePhotoById(id));
 
   try {
     const response = await fetch(url, {

@@ -64,12 +64,9 @@ const useFetcher = (fetcher: Function, options?: IUseFetcherOptions) => {
   return getData;
 };
 
-const createUrlAddress = (
-  baseUrl: string,
-  path: string = '/',
-  params?: IUrlParams
-): string => {
-  const url: URL = new URL(`/api/${path}`, baseUrl);
+const createUrlAddress = (path: string = '/', params?: IUrlParams): string => {
+  const BASE_URL = import.meta.env.VITE_API_URL || 'http:localhost:3000';
+  const url: URL = new URL(path, BASE_URL);
 
   if (params) {
     const queries: URLSearchParams = new URLSearchParams(params);

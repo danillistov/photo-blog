@@ -3,6 +3,7 @@ import type { IPhotoResponse } from '@/types/photos.types';
 const photos: IPhotoResponse[] = [
   {
     albumId: 1,
+    _id: '',
     id: 1,
     title: 'accusamus beatae ad facilis cum similique qui sunt',
     url: 'https://via.placeholder.com/600/92c952',
@@ -10,6 +11,7 @@ const photos: IPhotoResponse[] = [
   },
   {
     albumId: 1,
+    _id: '',
     id: 2,
     title: 'reprehenderit est deserunt velit ipsam',
     url: 'https://via.placeholder.com/600/771796',
@@ -18,6 +20,7 @@ const photos: IPhotoResponse[] = [
   {
     albumId: 2,
     id: 3,
+    _id: '',
     title: 'officia porro iure quia iusto qui ipsa ut modi',
     url: 'https://via.placeholder.com/600/24f355',
     thumbnailUrl: 'https://via.placeholder.com/150/24f355',
