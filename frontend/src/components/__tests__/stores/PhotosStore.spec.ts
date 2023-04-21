@@ -89,5 +89,8 @@ describe('PhotosStore.ts', () => {
 
     store.setSearchString(searchPrompt);
     expect(store.search).toBe(searchPrompt);
+
+    store.setSearchString();
+    expect(store.search).toBe('');
   });
 });
