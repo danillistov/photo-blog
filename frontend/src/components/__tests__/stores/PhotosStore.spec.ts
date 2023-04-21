@@ -10,9 +10,17 @@ import {
   expect,
 } from 'vitest';
 import photos from '@/components/__tests__/__fixtures__/photos';
-import { startMockServer } from '@/components/mock/server';
+import { startMockServer } from '@/components/__tests__/mock/server';
+import { rest } from 'msw';
+import endpoints from '@/api/endpoints';
 
 const server = startMockServer();
+
+const defaultPhotosStoreState = {
+  photos: [],
+  search: '',
+  searchIsEnabled: false,
+};
 
 describe('PhotosStore.ts', () => {
   beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
@@ -25,7 +33,13 @@ describe('PhotosStore.ts', () => {
     setActivePinia(createPinia());
   });
 
-  it('check', async () => {
+  it('should have correct default state properties', () => {
+    const store = usePhotosStore();
+
+    expect(store.$state).toEqual(defaultPhotosStoreState);
+  });
+
+  it('should successfully fetch photos', async () => {
     const store = usePhotosStore();
 
     await store.fetchPhotos();
@@ -33,4 +47,34 @@ describe('PhotosStore.ts', () => {
     expect(store.getPhotos).toHaveLength(3);
     expect(store.getPhotos[0]).toEqual(photos[0]);
   });
+
+  it('should searchIsEnabled property state to be truthy after data fetching', async () => {
+    const store = usePhotosStore();
+
+    expect(store.searchIsEnabled).toBeFalsy();
+
+    await store.fetchPhotos();
+    expect(store.searchIsEnabled).toBeTruthy();
+  });
+
+  it('should searchIsEnabled property state to be falsy if data fetching error', async () => {
+    const store = usePhotosStore();
+
+    expect(store.searchIsEnabled).toBeFalsy();
+
+    server.use(
+      rest.get(endpoints.allPhotos, async (req, res, ctx) => {
+        return res(
+          ctx.status(500),
+          ctx.json({
+            errorMessage: 'User not found',
+          })
+        );
+      })
+    );
+
+    await store.fetchPhotos();
+    console.log(store.searchIsEnabled);
+  });
+  it('should saving search prompt to state search property', () => {});
 });

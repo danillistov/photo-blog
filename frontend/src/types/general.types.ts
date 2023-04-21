@@ -6,3 +6,7 @@ export interface ILoading {
 export interface IUrlParams {
   [key: string]: string;
 }
+
+export interface IUseFetcherOptions {
+  loadingMessage?: string;
+}

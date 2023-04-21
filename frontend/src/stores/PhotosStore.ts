@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import type { IPhotoResponse } from '@/types/photos.types';
-import { useFetcher } from '@/helpers';
+import { useFetcher } from '@/composables';
 import { fetchAllPhotos } from '@/api';
 
 interface IPhotosStoreState {
@@ -33,7 +33,7 @@ export const usePhotosStore = defineStore('PhotosStore', {
       return filteredPhotos ?? [];
     },
     getSearchInputStatus(state): boolean {
-      return state?.searchIsEnabled ?? '';
+      return state?.searchIsEnabled ?? false;
     },
   },
 
@@ -45,6 +45,7 @@ export const usePhotosStore = defineStore('PhotosStore', {
 
       try {
         const photos: IPhotoResponse[] = await getData();
+
         this.photos = photos;
         this.searchIsEnabled = true;
       } catch (err) {

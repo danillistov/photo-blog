@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import type { IPhotoResponse } from '@/types/photos.types';
 import { fetchPhotoById } from '@/api';
-import { useFetcher } from '@/helpers';
+import { useFetcher } from '@/composables';
 
 interface IPhotoStoreState {
   currentPhoto: IPhotoResponse;
