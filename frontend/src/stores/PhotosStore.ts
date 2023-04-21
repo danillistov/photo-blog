@@ -49,6 +49,7 @@ export const usePhotosStore = defineStore('PhotosStore', {
         this.photos = photos;
         this.searchIsEnabled = true;
       } catch (err) {
+        console.error(err);
         this.searchIsEnabled = false;
       }
     },

@@ -74,7 +74,20 @@ describe('PhotosStore.ts', () => {
     );
 
     await store.fetchPhotos();
-    console.log(store.searchIsEnabled);
+    expect(store.searchIsEnabled).toBeFalsy();
+
+    server.resetHandlers();
+    await store.fetchPhotos();
+    expect(store.searchIsEnabled).toBeTruthy();
   });
-  it('should saving search prompt to state search property', () => {});
+
+  it('should saving search prompt to state search property', () => {
+    const store = usePhotosStore();
+    const searchPrompt = 'Tokyo Tower';
+
+    expect(store.search).toBe('');
+
+    store.setSearchString(searchPrompt);
+    expect(store.search).toBe(searchPrompt);
+  });
 });
