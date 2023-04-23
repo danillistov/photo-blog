@@ -8,6 +8,12 @@ const restServerHandlers = [
   rest.get(endpoints.allPhotos, (_, res, ctx) => {
     return res(ctx.status(200), ctx.json(photos));
   }),
+  rest.get(endpoints.photoById(':id'), (req, res, ctx) => {
+    const { id } = req.params;
+    const photo = photos.find((photo) => photo._id === id);
+
+    return res(ctx.status(200), ctx.json(photo));
+  }),
 ];
 
 if (!global?.fetch) {
