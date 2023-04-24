@@ -12,6 +12,10 @@ withDefaults(
   }
 );
 
+const emit = defineEmits<{
+  (e: 'onSearchInputFocus', state: boolean): void;
+}>();
+
 const open = ref(false);
 const searchEl = ref<HTMLInputElement>();
 const photosStore = usePhotosStore();
@@ -19,6 +23,8 @@ const { setSearchString } = photosStore;
 
 function changeSearchState(state: boolean = false): void {
   open.value = state;
+  emit('onSearchInputFocus', state);
+
   if (state) {
     searchEl.value?.focus();
   }

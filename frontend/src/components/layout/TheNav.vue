@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { usePhotosStore } from '@/stores/PhotosStore';
 import { scrollDirectionHandler } from '@/helpers';
@@ -15,14 +15,23 @@ const navigation = ref([
 const photoStore = usePhotosStore();
 const { getSearchInputStatus: isSearchInputEnabled } = storeToRefs(photoStore);
 
-const navIsShown = ref(true);
+const showHeaderBar = ref(true);
+const isSearchInputFocused = ref(false);
+
+const headerBarIsVisible = computed(() => {
+  return !showHeaderBar.value && !isSearchInputFocused.value;
+});
 
 function showNavBar(): void {
-  navIsShown.value = true;
+  showHeaderBar.value = true;
 }
 
 function hideNavBar(): void {
-  navIsShown.value = false;
+  showHeaderBar.value = false;
+}
+
+function showNavOnSearchInput(state: boolean): void {
+  isSearchInputFocused.value = state;
 }
 
 onMounted(async () => {
@@ -34,7 +43,7 @@ onMounted(async () => {
   <Disclosure
     as="nav"
     class="the-nav fixed top-0 left-0 w-full bg-stone-900 z-10"
-    :class="{ '_is-hidden': !navIsShown }"
+    :class="{ '_is-hidden': headerBarIsVisible }"
     v-slot="{ open }"
   >
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -83,7 +92,10 @@ onMounted(async () => {
           </div>
         </div>
 
-        <SearchInput :is-search-enabled="isSearchInputEnabled" />
+        <SearchInput
+          :is-search-enabled="isSearchInputEnabled"
+          @on-search-input-focus="showNavOnSearchInput"
+        />
       </div>
     </div>
 
